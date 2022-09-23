@@ -5,6 +5,8 @@ import { Lights } from "./components/Lights"
 import { House } from "./components/House/House"
 import { OrbitControls } from "@react-three/drei"
 import { Graves } from "./components/Graves"
+import { Fog } from "./components/Fog"
+import { Ghosts } from "./components/Ghosts"
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
       >
         <OrbitControls />
         <Lights />
+        <Fog />
         <Suspense fallback={null}>
+          <Ghosts />
           <Floor />
           <House />
           <Graves />
