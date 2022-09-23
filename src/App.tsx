@@ -4,6 +4,7 @@ import { Floor } from "./components/Floor"
 import { Lights } from "./components/Lights"
 import { House } from "./components/House/House"
 import { OrbitControls } from "@react-three/drei"
+import { Graves } from "./components/Graves"
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Suspense fallback={null}>
           <Floor />
           <House />
+          <Graves />
         </Suspense>
         <axesHelper args={[10]} />
       </Canvas>
