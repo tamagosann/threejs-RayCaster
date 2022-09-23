@@ -2,6 +2,8 @@ import React, { Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
 import { Floor } from "./components/Floor"
 import { Lights } from "./components/Lights"
+import { House } from "./components/House/House"
+import { OrbitControls } from "@react-three/drei"
 
 function App() {
   return (
@@ -12,10 +14,13 @@ function App() {
         camera={{ position: [0, 5, 15] }}
         style={{ width: "100vw", height: "100vh" }}
       >
+        <OrbitControls />
         <Lights />
         <Suspense fallback={null}>
           <Floor />
+          <House />
         </Suspense>
+        <axesHelper args={[10]} />
       </Canvas>
     </div>
   )
