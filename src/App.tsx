@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react"
+import { Canvas } from "@react-three/fiber"
+import { Floor } from "./components/Floor"
+import { Lights } from "./components/Lights"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Canvas
+        shadows
+        dpr={[1, 2]}
+        camera={{ position: [0, 5, 15] }}
+        style={{ width: "100vw", height: "100vh" }}
+      >
+        <Lights />
+        <Suspense fallback={null}>
+          <Floor />
+        </Suspense>
+      </Canvas>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
