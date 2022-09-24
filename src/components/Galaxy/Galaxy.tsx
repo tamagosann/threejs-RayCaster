@@ -1,8 +1,9 @@
 import { Point, Points } from "@react-three/drei"
 import { useControls } from "leva"
-import { FC } from "react"
+import { FC, useRef } from "react"
 import * as THREE from "three"
 import colors from "nice-color-palettes"
+import { useFrame } from "@react-three/fiber"
 
 const palette = colors[Math.floor(Math.random() * colors.length)]
 
@@ -30,8 +31,15 @@ export const Galaxy = () => {
     insideColor,
     outsideColor,
   } = useControls(controls)
+  const particlesRef = useRef<typeof Points>(null)
+  useFrame((state) => {
+    // Pointsなどの型がぶっ壊れているため今回は@ts-ignodeで対処
+    // @ts-ignore
+    particlesRef.current!.rotation!.y = state.clock.getElapsedTime() * 0.2
+  })
   return (
-    <Points limit={10000}>
+    // @ts-ignore
+    <Points ref={particlesRef} limit={10000}>
       <pointsMaterial
         size={size}
         depthWrite={false}
