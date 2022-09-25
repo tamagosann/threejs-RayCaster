@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
 import { Galaxy } from "./components/Galaxy/Galaxy"
 import { OrbitControls } from "@react-three/drei"
+import { RayCaster } from "./components/RayCaster/RayCaster"
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
         <OrbitControls />
         <Suspense fallback={null}>
           <color attach="background" args={["black"]} />
-          <Galaxy />
+          <RayCaster />
         </Suspense>
+        <axesHelper args={[5]} />
       </Canvas>
     </div>
   )
