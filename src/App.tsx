@@ -5,7 +5,9 @@ import { ScrollBasedAnimation } from "./components/ScrollAnimation/ScrollBasedAn
 function App() {
   return (
     <Canvas>
+      <color attach="background" args={["black"]} />
       <ambientLight />
+      <directionalLight color="red" intensity={10} />
       <Suspense fallback={null}>
         <ScrollBasedAnimation />
       </Suspense>

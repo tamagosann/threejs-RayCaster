@@ -1,27 +1,46 @@
-import { Scroll, ScrollControls } from "@react-three/drei"
-import { useThree } from "@react-three/fiber"
+import { OrbitControls, Scroll, ScrollControls } from "@react-three/drei"
+import { useFrame, useThree } from "@react-three/fiber"
 import { Html } from "../Html"
+import { Objects } from "./Objects"
+import * as THREE from "three"
 
 export const ScrollBasedAnimation = () => {
-  const { height, width } = useThree((state) => state.viewport)
+  // これで、マウスをホバーした時にオブジェクトがぬるぬる動くようになる
+  useFrame(({ mouse, camera }) => {
+    // console.log(mouse)
+    camera.position.x = THREE.MathUtils.lerp(
+      camera.position.x,
+      mouse.x * 0.5,
+      0.03
+    )
+    camera.position.y = THREE.MathUtils.lerp(
+      camera.position.y,
+      mouse.y * 0.8,
+      0.01
+    )
+    // この下二つは正直よくわからない
+    camera.position.z = THREE.MathUtils.lerp(
+      camera.position.z,
+      Math.max(4, Math.abs(mouse.x * mouse.y * 8)),
+      0.01
+    )
+    camera.rotation.y = THREE.MathUtils.lerp(
+      camera.rotation.y,
+      mouse.x * -Math.PI * 0.025,
+      0.001
+    )
+  })
+
   return (
-    <ScrollControls pages={3} distance={0.2}>
-      <Scroll>
-        <ambientLight />
-        <pointLight color="blue" position={[8, -25, 5]} intensity={20} />
-        <pointLight
-          color="red"
-          position={[0, -height * 2.25, 5]}
-          intensity={10}
-        />
-        <mesh>
-          <boxGeometry />
-          <meshPhysicalMaterial transparent color="blue" />
-        </mesh>
-      </Scroll>
-      {/* <Scroll html>
-        <Html />
-      </Scroll> */}
-    </ScrollControls>
+    <>
+      <ScrollControls pages={3}>
+        <Scroll>
+          <Objects />
+        </Scroll>
+        <Scroll html>
+          <Html />
+        </Scroll>
+      </ScrollControls>
+    </>
   )
 }
