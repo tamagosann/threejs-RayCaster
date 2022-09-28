@@ -3,6 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber"
 import { Html } from "../Html"
 import { Objects } from "./Objects"
 import * as THREE from "three"
+import { Particles } from "./Particles"
 
 export const ScrollBasedAnimation = () => {
   // これで、マウスをホバーした時にオブジェクトがぬるぬる動くようになる
@@ -36,6 +37,7 @@ export const ScrollBasedAnimation = () => {
       <ScrollControls pages={3}>
         <Scroll>
           <Objects />
+          <Particles />
         </Scroll>
         <Scroll html>
           <Html />
